@@ -12,7 +12,7 @@ function Navbar() {
       setUserData(user.displayName)
     },[])
     return (
-        <div className='bg-[#F4CE14] py-5 px-5 flex items-center justify-between'>
+        <div className='bg-[#F4CE14] py-4 px-5 flex items-center justify-between'>
             <div className='text-xl' >
                 Navbar
             </div>

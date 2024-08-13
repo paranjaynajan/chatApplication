@@ -20,7 +20,7 @@ export default function () {
     })
   }, [])
 
-  if (false) {
+  if (!userData) {
     return (
       <div className=" flex justify-center items-center min-h-screen bg-[#F5F7F8]">
         <Togglepanel />
