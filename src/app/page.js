@@ -11,7 +11,6 @@ export default function () {
     onAuthStateChanged(auth,(user)=>{
       if(user){
         setUserData(user)
-        console.log("user",user)
         const userInfo =JSON.stringify(user)
         localStorage.setItem('user',userInfo)
       }else{

@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@font-face {
+  font-family: "myfont";
+  src:  url('../../public/font/myfont/EduVICWANTBeginner-VariableFont_wght.ttf');
+}
+* {
+  font-family: "myfont";
+  
+}
+
 .clip{
     clip-path: circle(72.9% at 8% 50%);
     height: 100%;

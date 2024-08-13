@@ -66,7 +66,7 @@ function Chat({ friendId,setFriendId }) {
           <div className='cursor-pointer md:hidden block'onClick={()=>{setFriendId(null)}} >
             <KeyboardBackspaceIcon /> 
           </div>
-          <div className='text-xl'>
+          <div className='text-xl font-[600]'>
             {user[0]?.name}
           </div>
         </div>

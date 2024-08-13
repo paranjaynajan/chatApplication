@@ -32,8 +32,8 @@ function Sidebar({setFriendId}) {
               className="w-6 h-6 rounded-full mr-2"
             />
             <div className="flex flex-col gap-2">
-              <div >{friend.name}</div>
-              <div className="text-sm">{friend.lastText}</div>
+              <div className='font-[500] text-lg' >{friend.name}</div>
+              <div className="text-md ">{friend.lastText}</div>
             </div>
           </li>
         ))}

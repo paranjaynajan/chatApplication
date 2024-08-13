@@ -13,7 +13,7 @@ function Navbar() {
     },[])
     return (
         <div className='bg-[#F4CE14] py-4 px-5 flex items-center justify-between'>
-            <div className='text-xl' >
+            <div className='text-xl font-[600]' >
                 MyChat
             </div>
             <div className='flex justify-center items-center gap-2'>
