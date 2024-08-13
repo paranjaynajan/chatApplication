@@ -1,16 +1,21 @@
-import React from 'react'
-import { getAuth, onAuthStateChanged ,signOut} from "firebase/auth";
-import app from "../../../utils/firebaseconfig.js"
-function Home({userData}) {
-  const auth = getAuth(app);
+import React from "react";
+import Sidebar from "../Sidebar/Sidebar.jsx";
+import Chat from "../Chat/Chat.jsx";
+
+function Home() {
   return (
-    <div className='flex flex-col gap-2 justify-center items-center'>
-      <h1 className='text-lg font-bold'>
-        Hello,{userData.email}
-        </h1>
-    <button  className=" xs:p-4 p-2  border-[2px] rounded-md border-black bg-black text-white" onClick={()=>signOut(auth)}>SignOut</button>
+    <div className="bg-[#F5F7F8] flex h-screen justify-center items-center">
+      <div className="border-[1px] shadow-2xl rounded-[10px] w-full max-w-[1200px] h-[90%] md:h-[80%] grid grid-cols-1 md:grid-cols-6 overflow-hidden">
+        <div className="col-span-2 bg-[#495E57] h-full">
+          <Sidebar />
+        </div>
+        <div className="col-span-4 hidden md:block w-full h-full">
+          <Chat />
+        </div>
+      </div>
     </div>
-  )
+  );
 }
 
-export default Home
+
+export default Home;

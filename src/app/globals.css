@@ -29,3 +29,23 @@
   .icons i{
     margin:10px 3px 20px 3px;
 }
+body::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .scroll-container1::-webkit-scrollbar {
+    width: 12px;
+  }
+  
+  .scroll-container1::-webkit-scrollbar-track {
+    background:#495E57
+  }
+  
+  .scroll-container1::-webkit-scrollbar-thumb {
+    background:#F4CE14;
+    
+  }
+  
+  .scroll-container1::-webkit-scrollbar-button {
+    display: none;
+  }

@@ -5,7 +5,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import XIcon from '@mui/icons-material/X';
 import { useRouter } from 'next/navigation';
 import { v4 as uuidv4 } from 'uuid';
-import { getAuth, signInWithEmailAndPassword,signInWithPopup} from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword,signInWithPopup,GithubAuthProvider } from "firebase/auth";
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import app from "../../../utils/firebaseconfig.js";
@@ -59,10 +59,6 @@ function Signin() {
         const errorMessage = error.message;
         console.log(errorCode,errorMessage)
       }
-
-
-      //   localStorage.setItem('token', 'token');
-      //  router.refresh()
     }
   };
 
@@ -86,7 +82,25 @@ function Signin() {
    
   
   }
+  const signInwithGithub=async()=>{
+    try{
+      const result=await signInWithPopup(auth, provider)
+      const credential = GithubAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      localStorage.setItem('token', token);
   
+    }catch(error){  
+      const errorCode = error.code;
+      const errorMessage = error.message;
+  
+      const email = error.customData.email;
+      const credential = GithubAuthProvider.credentialFromError(error);
+      console.log(errorCode,errorMessage)
+    }
+    
+   
+  
+  }
 
   return (
     <div className='relative'>
@@ -94,10 +108,10 @@ function Signin() {
         <div className='mb-5 flex flex-col justify-center items-center gap-2'>
           <div className='text-center text-4xl font-bold '>Login</div>
           <div className="w-full flex justify-center items-center gap-5">
-          <div onClick={signInwithGoogle} ><GoogleIcon /></div>
-            <div ><FacebookIcon /></div>
-            <div ><GitHubIcon /></div>
-            <div ><XIcon /></div>
+          <div onClick={signInwithGoogle} className='cursor-pointer' ><GoogleIcon /></div>
+            <div className='cursor-pointer' ><FacebookIcon /></div>
+            <div className='cursor-pointer' onClick={signInwithGithub} ><GitHubIcon /></div>
+            <div className='cursor-pointer' ><XIcon /></div>
           </div>
           <div>or use your email password
 
