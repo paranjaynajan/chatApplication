@@ -5,7 +5,8 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Image from 'next/image';
 import wall from '../../../../public/images/wallpaepr.png'
-function Chat({ friendId }) {
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+function Chat({ friendId,setFriendId }) {
   const [user, setUser] = useState(0)
   const [open, setOpen] = useState(false);
 
@@ -36,7 +37,7 @@ function Chat({ friendId }) {
       <div className="h-full flex flex-col items-center justify-center text-center bg-[#f7f7f7] p-6">
         <div className="flex flex-col items-center">
           <Image
-            src={wall} // Replace with your own illustration or image
+            src={wall} 
             alt="No chat selected"
             className="mb-4 shadow-lg"
           />
@@ -61,21 +62,13 @@ function Chat({ friendId }) {
   return (
     <div className=''>
       <div className='py-[26px] px-5 flex relative text-xl items-center justify-between bg-[#45474B] text-[#F4CE14]'>
-        {/* {open && <div className='absolute top-[90%] right-0 bg-white p-5 shadow-lg rounded-lg' >
-          <div className=' flex flex-col items-center justify-center gap-2 relative'>
-            <div>User</div>
-            <button
-              onClick={() => { }}
-              type="button"
-              className=" xs:p-2 p-2 w-full border-[2px] cursor-pointer    rounded-md border-black bg-[black] text-white"
-            >
-              Settings
-            </button>
+        <div className='flex justify-center items-center gap-3'>
+          <div className='cursor-pointer md:hidden block'onClick={()=>{setFriendId(null)}} >
+            <KeyboardBackspaceIcon /> 
           </div>
-          <div className='triangle'></div>
-        </div>} */}
-        <div className='text-xl'>
-          {user[0]?.name}
+          <div className='text-xl'>
+            {user[0]?.name}
+          </div>
         </div>
         <div className='flex gap-4'>
           <VideoCallIcon color='#F4CE14' fontSize='large' className='cursor-pointer' />
