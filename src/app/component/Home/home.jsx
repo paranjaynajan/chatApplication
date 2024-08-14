@@ -6,8 +6,8 @@ function Home() {
   const [friendId, setFriendId] = useState(null);
 
   return (
-    <div className="bg-[#F5F7F8] flex h-screen justify-center items-center px-10">
-      <div className="border-[1px] shadow-2xl rounded-[10px] w-full max-w-[1200px] h-[90%] md:h-[80%] grid grid-cols-1 md:grid-cols-6 overflow-hidden">
+    <div className="bg-[#F5F7F8] flex h-screen   justify-center items-center px-10">
+      <div className="border-[1px] shadow-2xl rounded-[10px] w-full overflow-y-scroll md:scroll-container2 max-w-[1200px] h-[100%] md:h-[80%] grid grid-cols-1 md:grid-cols-6 ">
         <div className={`col-span-2 bg-[#495E57] shadow-r-lg h-full ${friendId && 'hidden md:block'}`}>
           <Sidebar setFriendId={setFriendId} />
         </div>

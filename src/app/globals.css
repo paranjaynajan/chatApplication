@@ -60,6 +60,25 @@ body::-webkit-scrollbar {
     display: none;
   }
 
+
+  .scroll-container2::-webkit-scrollbar {
+    width: 12px;
+  }
+  
+  .scroll-container2::-webkit-scrollbar-track {
+    background:#f7f7f7;
+  }
+  
+  .scroll-container2::-webkit-scrollbar-thumb {
+    background:#495E57;
+    
+  }
+  
+  .scroll-container2::-webkit-scrollbar-button {
+    display: none;
+  }
+
+
   .triangle {
     top: -14%;
     right: 7%;

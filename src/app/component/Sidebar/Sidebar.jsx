@@ -18,7 +18,7 @@ function Sidebar({setFriendId}) {
     <div className="flex flex-col h-full">
       <Navbar />
       <Search friends={friends} setFilteredFriends={setFilteredFriends} />
-      <ul className=" overflow-auto h-[700px] scroll-container1  pb-[125px] md:pb-[135px]"
+      <ul className=" overflow-auto h-full md:h-[450px] scroll-container1  "
       >
         {filteredFriends.map((friend, index) => (
           <li

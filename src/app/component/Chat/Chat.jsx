@@ -34,28 +34,31 @@ function Chat({ friendId,setFriendId }) {
 
   if (!friendId) {
     return (
-      <div className="h-full flex flex-col items-center justify-center text-center bg-[#f7f7f7] p-6">
-        <div className="flex flex-col items-center">
-          <Image
-            src={wall} 
-            alt="No chat selected"
-            className="mb-4 shadow-lg"
-          />
-          <h2 className="text-2xl font-semibold text-gray-700 mb-2">
-            Welcome to the Chat!
-          </h2>
-          <p className="text-gray-600 mb-6">
-            Select a friend to start a conversation.
-          </p>
-          <button
-            onClick={() => { }}
-            type="button"
-            className=" xs:p-2 p-2 w-[50%] border-[2px] cursor-pointer    rounded-md border-black bg-[black] text-white"
-          >
-            Find new friends
-          </button>
-        </div>
+      <div className="h-full flex flex-col   text-center bg-[#f7f7f7] py-4 px-6 overflow-y-auto">
+      <div className="flex flex-col items-center">
+        <Image
+          src={wall} 
+          alt="No chat selected"
+          className="mb-4 shadow-lg"
+        />
+        <h2 className="text-2xl font-semibold text-black mb-2">
+          Welcome to the Chat!
+        </h2>
+        <p className="text-gray-600 mb-2">
+          Select a friend to start a conversation.
+        </p>
+        <button
+          onClick={() => { }}
+          type="button"
+          className="xs:p-2 p-2 w-[50%] border-[2px] cursor-pointer rounded-md border-black bg-[black] text-white"
+        >
+          Find new friends
+        </button>
       </div>
+    </div>
+    
+    
+
     );
   }
 
