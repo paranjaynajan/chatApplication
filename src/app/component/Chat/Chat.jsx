@@ -62,11 +62,11 @@ function Chat({ friendId, setFriendId }) {
   ];
 
   return (
-    <div className="flex flex-col h-full  ">
+    <div className="flex flex-col h-full   ">
       <div className="sticky top-0 z-10">
         <Callingbar userName={user[0]?.name} setFriendId={setFriendId} />
       </div>
-      <div style={{ scrollBehavior: 'smooth' }} className="flex-grow  pb-5 bg-[url('/path/to/whatsapp-bg.png')] bg-repeat bg-center p-4 overflow-y-auto scroll-container2">
+      <div style={{ scrollBehavior: 'smooth' }} className="flex-grow   pb-5 bg-[url('/path/to/whatsapp-bg.png')] bg-repeat bg-center p-4 overflow-y-auto scroll-container2">
        <ChatWindow messages={messages}/>
       </div>
       <div className="p-4 bg-[#F5F7F8] sticky bottom-0">

@@ -5,7 +5,7 @@ import SendIcon from '@mui/icons-material/Send';
 import React from 'react'
 
 function Input() {
-  return (<div className='flex items-center gap-5'>
+  return (<div className='flex rounded-b-[10px] items-center gap-5'>
 <AddPhotoAlternateIcon fontSize='large' className='cursor-pointer'/>
     <input
     type="text"

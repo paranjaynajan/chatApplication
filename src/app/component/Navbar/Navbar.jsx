@@ -3,22 +3,25 @@ import Avatar from '@mui/material/Avatar';
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import app from '../../../utils/firebaseconfig.js'
 import { Tooltip } from '@mui/material';
+import { useRouter } from 'next/navigation.js';
 function Navbar() {
+    const router =useRouter()
     const auth = getAuth(app);
     const [userData,setUserData]=useState("")
     useEffect(()=>{
       let  user=  localStorage.getItem('user')
       user= JSON.parse(user)
-      setUserData(user.displayName)
-    },[])
+      if(user)
+      setUserData(user?.displayName)
+    },[userData])
     return (
-        <div className='bg-[#F4CE14] py-4 px-5 flex items-center justify-between'>
+        <div className='bg-[#F4CE14] rounded-t-[10px] py-4 px-5 flex items-center justify-between'>
             <div className='text-xl font-[600]' >
                 MyChat
             </div>
             <div className='flex justify-center items-center gap-2'>
                 <Tooltip title={userData} className='cursor-pointer'>
-                <Avatar alt={userData} src="/images/avatar/1.jpg" />
+                <Avatar alt={userData} src="/images/avatar/1.jpg" onClick={()=>router.push("/profile")} />
                 </Tooltip>
                
                 <button

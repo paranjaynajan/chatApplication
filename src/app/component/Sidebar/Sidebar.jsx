@@ -23,7 +23,8 @@ function Sidebar({setFriendId}) {
     <div className="flex flex-col h-full">
       <Navbar />
       <Search friends={friends} setFilteredFriends={setFilteredFriends} />
-      <ul className="overflow-auto h-full md:h-[450px] scroll-container1" style={{ scrollBehavior: 'smooth' }}>
+      <ul className="overflow-auto mt-3 sectionHeight scroll-container1" style={{ scrollBehavior: 'smooth' }}>
+
       {filteredFriends.map((friend, index) => (
         <motion.li
           key={index}

@@ -14,7 +14,7 @@ const itemVariants = {
 
 function ChatPlaceholder() {
   return (
-    <div className="h-full flex flex-col text-center bg-[#f7f7f7] py-4 px-6 overflow-y-auto">
+    <div className="h-full flex flex-col justify-center text-center bg-[#f7f7f7] py-4 px-6 overflow-y-auto">
       <motion.div
         className="flex flex-col items-center"
         initial="hidden"
