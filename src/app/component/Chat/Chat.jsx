@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react'
 import friends from "@/utils/jsonData"
 
 import Image from 'next/image';
-import wall from '../../../../public/images/wallpaepr.png'
+
 
 import Input from '../Input/Input';
 import Callingbar from '../Callingbar/Callingbar';
 import ChatWindow from '../Chatwindow/Chatwindow';
+import ChatPlaceholder from '../ChatPlaceholder/ChatPlaceholder';
 function Chat({ friendId, setFriendId }) {
   const [user, setUser] = useState(0)
 
@@ -27,28 +28,7 @@ function Chat({ friendId, setFriendId }) {
 
   if (!friendId) {
     return (
-      <div className="h-full flex flex-col   text-center bg-[#f7f7f7] py-4 px-6 overflow-y-auto">
-        <div className="flex flex-col items-center">
-          <Image
-            src={wall}
-            alt="No chat selected"
-            className="mb-4 shadow-lg"
-          />
-          <h2 className="text-2xl font-semibold text-black mb-2">
-            Welcome to the Chat!
-          </h2>
-          <p className="text-gray-600 mb-2">
-            Select a friend to start a conversation.
-          </p>
-          <button
-            onClick={() => { }}
-            type="button"
-            className="xs:p-2 p-2 w-[50%] border-[2px] cursor-pointer rounded-md border-black bg-[black] text-white"
-          >
-            Find new friends
-          </button>
-        </div>
-      </div>
+    <ChatPlaceholder/>
 
 
 
@@ -86,7 +66,7 @@ function Chat({ friendId, setFriendId }) {
       <div className="sticky top-0 z-10">
         <Callingbar userName={user[0]?.name} setFriendId={setFriendId} />
       </div>
-      <div className="flex-grow  pb-5 bg-[url('/path/to/whatsapp-bg.png')] bg-repeat bg-center p-4 overflow-y-auto scroll-container2">
+      <div style={{ scrollBehavior: 'smooth' }} className="flex-grow  pb-5 bg-[url('/path/to/whatsapp-bg.png')] bg-repeat bg-center p-4 overflow-y-auto scroll-container2">
        <ChatWindow messages={messages}/>
       </div>
       <div className="p-4 bg-[#F5F7F8] sticky bottom-0">
