@@ -3,6 +3,7 @@ import React, { useState,useEffect,useRef } from "react";
 import Signin from "../Signin/Signin";
 import SignUp from "../Signup/Signup";
 import { motion } from "framer-motion"
+import LoginWithMobile from "../PhoneLogin/PhoneLogin";
 
 function Togglepanel() {
   const [toggle, setToggle] = useState(false);
@@ -10,6 +11,7 @@ function Togglepanel() {
   const [x1, setX1] = useState(0);
   const [y,setY]=useState(0)
   const [y1,setY1]=useState(0)
+  const [phoneLogin, setPhoneLogin] = useState(false)
   const [displayLogo,setDisplayLogo]=useState(true)
   const [rotate, setRotate] = useState(0);
   const animateFun = () => {
@@ -50,7 +52,7 @@ function Togglepanel() {
         transition={{ type: "spring" }}
         style={{width: "100%"}}
       >
-        {!toggle ? <Signin /> : <SignUp />}
+        {!toggle ?phoneLogin? <LoginWithMobile setPhoneLogin={setPhoneLogin}/>: <Signin setPhoneLogin={setPhoneLogin} /> : <SignUp />}
       </motion.div>
   </div>
    

@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-
+import { updateProfile,getAuth,onAuthStateChanged } from "firebase/auth";
+import app from "../../../utils/firebaseconfig"
 const UpdateProfile = () => {
     const [formData, setFormData] = useState({
         fullName: '',
@@ -12,8 +13,7 @@ const UpdateProfile = () => {
         age: '',
     });
     const [errors, setErrors] = useState({});
-
-    // Function to calculate age based on Date of Birth
+    const auth =getAuth(app)
     const calculateAge = (dob) => {
         const birthDate = new Date(dob);
         const today = new Date();
@@ -25,7 +25,23 @@ const UpdateProfile = () => {
         return age;
     };
 
-    // Update age whenever Date of Birth changes
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+          if (user) {
+            setFormData((prev)=>{
+                let obj ={}
+                obj.fullName=user.displayName
+                obj.email=user.email
+                obj.phone=user.phoneNumber
+                return obj
+            })
+          
+          } 
+        });
+      
+        return () => unsubscribe();
+      }, []);
+
     useEffect(() => {
         if (formData.dob) {
             setFormData((prevData) => ({

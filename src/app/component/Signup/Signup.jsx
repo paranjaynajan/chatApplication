@@ -11,13 +11,14 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import React, { ChangeEvent, FormEvent, useEffect, useMemo, useRef, useState } from 'react';
 import { getDatabase, ref, set } from "firebase/database"
-import { getAuth, createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithPopup ,updateProfile} from "firebase/auth";
 import app from "../../../utils/firebaseconfig.js";
+import { collection, addDoc, getFirestore } from "firebase/firestore"
 
 
 
 
-const db = getDatabase(app);
+const db = getFirestore(app);
 
 
 const SignUp = () => {
@@ -33,20 +34,36 @@ const SignUp = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const dropdownRef = useRef(null);
-    function writeUserData(userId, name, email, phone, password) {
+    function writeUserData(userId, name, email, phone) {
         set(ref(db, 'users/' + userId), {
             username: name,
             phone: phone,
             email: email,
-            password: password,
         });
     }
-
+async function writeIntoFireStore( name, email, phone,photoUrl){
+    try {
+        console.log('Writing', name, email, photoUrl);
+        const docRef = await addDoc(collection(db, "users"), {
+            username: name,
+            phone: phone,
+            email: email,
+            photoUrl:photoUrl
+        });
+        console.log("Document written with ID: ", docRef.id);
+      } catch (e) {
+        console.error("Error adding document: ", e);
+      }
+}
 
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
+        setErrors((prevErrors) => ({
+            ...prevErrors,
+            [name]: '',
+          }));
     };
 
     const validate = () => {
@@ -74,14 +91,14 @@ const SignUp = () => {
         if (validate()) {
 
             setErrors({});
-
-            const userId = uuidv4();
             try {
 
                 const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password)
-                writeUserData(userId, formData.name, formData.email, formData.phoneNumber, formData.password)
                 const user = userCredential.user;
-                console.log(user.accessToken)
+                await updateProfile(user, {
+                    displayName: formData.name,
+                });
+                writeIntoFireStore( formData.name, formData.email, formData.phoneNumber,user.photoURL)
                 localStorage.setItem('token', user.accessToken)
             } catch (error) {
                 const errorCode = error.code;

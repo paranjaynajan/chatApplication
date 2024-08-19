@@ -11,15 +11,17 @@ export default function () {
     onAuthStateChanged(auth,(user)=>{
       if(user){
         setUserData(user)
-        const userInfo =JSON.stringify(user)
-        localStorage.setItem('user',userInfo)
+        console.log(user,"17")
+        const obj={displayName:user?.displayName,email: user?.email,photoURL:user?.photoURL,uid:user?.uid}
+       const newUser=JSON.stringify(obj)
+        localStorage.setItem('user',newUser)
       }else{
         setUserData(null)
       }
     })
   }, [])
 
-  if (false) {
+  if (!userData) {
     return (
       <div className=" flex justify-center items-center min-h-screen bg-[#F5F7F8]">
         <Togglepanel />
