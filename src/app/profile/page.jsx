@@ -80,12 +80,9 @@ const Profile = () => {
 
         const userDocRef = doc(db, "users", userDoc.id);
         console.log(userDocRef)
-        
-
         await updateDoc(userDocRef, {
           photoUrl: url,
         });
-  
       } else {
         console.log("No user found with the provided email.");
       }
@@ -97,6 +94,7 @@ const Profile = () => {
 
   const changeProfilePic =async  (event) => {
     const fileName = userInfo?.uid
+    console.log(fileName)
     const file =event.target.files[0]
     const fileUpload = ref(storage, fileName);
     const uploadTask = uploadBytesResumable(fileUpload, file)

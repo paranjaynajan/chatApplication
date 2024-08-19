@@ -83,9 +83,35 @@ const UpdateProfile = () => {
         e.preventDefault();
         if (validate()) {
             console.log("Form Submitted", formData);
+            updateProfile(formData.email)
+
+
+
+            
         }
     };
+    const updateProfile = async (email) => {
+        try {
+          const usersRef = collection(db, "users");    
+           const q = query(usersRef, where("email", "==", email));  
+           const querySnapshot = await getDocs(q);
+          if (!querySnapshot.empty) {
+            const userDoc = querySnapshot.docs[0];
+            const userDocRef = doc(db, "users", userDoc.id);
 
+            await updateDoc(userDocRef, {
+              username:formData.fullName,
+              gender:formData.gender,
+              phone:formData.phone,
+              age:formData.age
+            });
+          } else {
+            console.log("No user found with the provided email.");
+          }
+        } catch (error) {
+          console.error("Error updating document: ", error);
+        }
+      };
     return (
         <div className="px-6">
             <form onSubmit={handleSubmit} className="relative py-2 md:py-0 h-auto ">
