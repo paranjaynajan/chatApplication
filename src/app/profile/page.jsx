@@ -26,8 +26,6 @@ const Profile = () => {
           const querySnapshot = await getDocs(q);
           
           if (querySnapshot) {
-            
-            console.log("helloooo",querySnapshot.docs)
             querySnapshot.forEach((doc) => {
               console.log(doc,"user")
               const data = doc.data();
@@ -63,17 +61,7 @@ const Profile = () => {
   }, []);
 
   
-  const testFirestoreAccess = async () => {
-    try {
-      const usersRef = collection(db, "users");
-      const snapshot = await getDocs(usersRef);
-      snapshot.forEach((doc) => {
-        console.log(doc.id, "=>", doc.data());
-      });
-    } catch (error) {
-      console.error("Error accessing Firestore:", error);
-    }
-  };
+
   
 
   

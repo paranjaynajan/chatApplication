@@ -12,16 +12,16 @@ function Navbar() {
       let  user=  localStorage.getItem('user')
       user= JSON.parse(user)
       if(user)
-      setUserData(user?.displayName)
-    },[userData])
+      setUserData(user)
+    },[])
     return (
         <div className='bg-[#F4CE14] rounded-t-[10px] py-4 px-5 flex items-center justify-between'>
             <div className='text-xl font-[600]' >
                 MyChat
             </div>
             <div className='flex justify-center items-center gap-2'>
-                <Tooltip title={userData} className='cursor-pointer'>
-                <Avatar alt={userData} src="/images/avatar/1.jpg" onClick={()=>router.push("/profile")} />
+                <Tooltip title={userData?.username} className='cursor-pointer'>
+                <Avatar alt={userData?.username} src={userData.photoUrl} onClick={()=>{console.log("ja");router.push("/profile")}} />
                 </Tooltip>
                
                 <button

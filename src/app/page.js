@@ -4,22 +4,38 @@ import { useEffect, useState } from "react";
 import Home from "@/app/component/Home/home"
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import app from '../utils/firebaseconfig.js'
+import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
 const auth = getAuth(app);
+const db = getFirestore(app);
 export default function () {
   const [userData, setUserData] = useState(null)
   useEffect(() => {
     onAuthStateChanged(auth,(user)=>{
       if(user){
         setUserData(user)
-        console.log(user,"17")
-        const obj={displayName:user?.displayName,email: user?.email,photoURL:user?.photoURL,uid:user?.uid}
-       const newUser=JSON.stringify(obj)
-        localStorage.setItem('user',newUser)
+
+        setUserDatatoLocalStorage(user)
+      
       }else{
         setUserData(null)
       }
     })
   }, [])
+
+
+  const setUserDatatoLocalStorage =async(user)=>{
+    const q = query(collection(db, "users"), where("email", "==", user.email));
+    const querySnapshot = await getDocs(q);
+    if (querySnapshot) {           
+      querySnapshot.forEach((doc) => {
+        console.log(doc,"user")
+        const data = doc.data();
+        const newUser=JSON.stringify(data)
+        localStorage.setItem('user',newUser)
+        
+      });
+    }
+  }
 
   if (!userData) {
     return (
