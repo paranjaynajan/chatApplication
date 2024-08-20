@@ -12,7 +12,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import React, { ChangeEvent, FormEvent, useEffect, useMemo, useRef, useState } from 'react';
 import { getDatabase, ref, set } from "firebase/database"
 import { getAuth, createUserWithEmailAndPassword, signInWithPopup ,updateProfile} from "firebase/auth";
-import {app} from "../../../utils/firebaseconfig.js";
+import app from "../../../utils/firebaseconfig";
 import { collection, addDoc, getFirestore } from "firebase/firestore"
 
 

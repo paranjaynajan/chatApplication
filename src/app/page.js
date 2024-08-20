@@ -3,7 +3,7 @@ import Togglepanel from "@/app/component/Togglepanel/Togglepanel";
 import { useEffect, useState } from "react";
 import Home from "@/app/component/Home/home"
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import {app} from '../utils/firebaseconfig.js'
+import app from '../utils/firebaseconfig'
 import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
 const auth = getAuth(app);
 const db = getFirestore(app);

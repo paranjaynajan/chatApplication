@@ -5,7 +5,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import XIcon from '@mui/icons-material/X';
 import { useRouter } from 'next/navigation';
 import { GoogleAuthProvider, getAuth, signInWithPhoneNumber, signInWithPopup, GithubAuthProvider, RecaptchaVerifier } from "firebase/auth";
-import {app} from "../../../utils/firebaseconfig.js";
+import app from "../../../utils/firebaseconfig";
 
 const countryCodes = [
   { code: '+91', country: 'IN' },

@@ -1,23 +1,18 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-// import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyAf6Bq_tZzfy6pLCezWL_CzenGzmwq5290",
-  authDomain: "chatapplicationparanjay.firebaseapp.com",
-  projectId: "chatapplicationparanjay",
-  storageBucket: "chatapplicationparanjay.appspot.com",
-  messagingSenderId: "553485662632",
-  appId: "1:553485662632:web:2fa8c9103ff6e1826a459d",
-  measurementId: "G-RXZVCWX1FW",
-  databaseUrl:"https://chatapplicationparanjay-default-rtdb.firebaseio.com/"
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
+  databaseUrl: process.env.REACT_APP_FIREBASE_DATABASE_URL
 };
 
 // Initialize Firebase
- const app = initializeApp(firebaseConfig);
- export default app
-// const analytics = getAnalytics(app);
+const app = initializeApp(firebaseConfig);
+export default app;
