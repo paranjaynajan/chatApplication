@@ -38,7 +38,7 @@ function Sidebar({setFriendId}) {
           <Avatar
             src={friend.profile_pic}
             alt={friend.name}
-            className="w-6 h-6 rounded-full mr-2"
+            className="w-10 h-10 rounded-full mr-2"
           />
           <div className="flex flex-col gap-2">
             <div className="font-[500] text-lg">{friend.name}</div>
