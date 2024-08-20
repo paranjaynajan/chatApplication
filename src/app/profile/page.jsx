@@ -7,7 +7,7 @@ import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { useRouter } from "next/navigation";
 import { getStorage, ref,uploadBytesResumable,getDownloadURL } from "firebase/storage";
-import app from "../../utils/firebaseconfig"
+import {app} from "../../utils/firebaseconfig"
 import { getFirestore, collection, query, where, getDocs, updateDoc, doc } from "firebase/firestore";
 import { updateProfile,getAuth,onAuthStateChanged } from "firebase/auth";
 const db = getFirestore(app);

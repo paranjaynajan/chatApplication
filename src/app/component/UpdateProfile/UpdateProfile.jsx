@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { updateProfile, getAuth, onAuthStateChanged } from "firebase/auth";
-import app from "../../../utils/firebaseconfig"
+import {app} from "../../../utils/firebaseconfig"
 const UpdateProfile = () => {
     const [formData, setFormData] = useState({
         fullName: '',

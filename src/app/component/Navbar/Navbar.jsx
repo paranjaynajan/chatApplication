@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Avatar from '@mui/material/Avatar';
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-import app from '../../../utils/firebaseconfig.js'
+import {app} from '../../../utils/firebaseconfig.js'
 import { Tooltip } from '@mui/material';
 import { useRouter } from 'next/navigation.js';
 function Navbar() {

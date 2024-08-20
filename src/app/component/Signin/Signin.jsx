@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { getAuth, signInWithEmailAndPassword,signInWithPopup,GithubAuthProvider } from "firebase/auth";
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import app from "../../../utils/firebaseconfig.js";
+import {app} from "../../../utils/firebaseconfig.js";
 import { GoogleAuthProvider } from "firebase/auth";
 function Signin({setPhoneLogin}) {
   const auth = getAuth(app);
