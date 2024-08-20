@@ -127,7 +127,7 @@ const SignUp = () => {
 
         <form onSubmit={handleSubmit} className=" relative py-2 md:py-0 h-auto">
             <div className='mb-5 flex flex-col justify-center items-center gap-2'>
-                <div className='text-center text-4xl font-bold '>SignUp</div>
+                <div className='text-center text-2xl sm:text-4xl font-bold '>SignUp</div>
                 <div className="w-full flex justify-center items-center gap-5">
                     <a href="https://www.google.com" target="_blank" rel="noopener noreferrer">
                         <GoogleIcon />

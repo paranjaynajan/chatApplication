@@ -133,7 +133,7 @@ function LoginWithMobile({ setPhoneLogin }) {
       <div id="recaptcha-container"></div>
       <div className=''>
         <div className='mb-5 flex flex-col justify-center items-center gap-2'>
-          <div className='text-center text-4xl font-bold '>Login via Mobile</div>
+          <div className='text-center text-2xl sm:text-4xl font-bold '>Login via Mobile</div>
           <div className="w-full flex justify-center items-center gap-5">
             <div onClick={signInWithGoogle} className='cursor-pointer' ><GoogleIcon /></div>
             <div className='cursor-pointer' ><FacebookIcon /></div>

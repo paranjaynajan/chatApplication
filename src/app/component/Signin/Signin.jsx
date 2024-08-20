@@ -73,8 +73,6 @@ function Signin({ setPhoneLogin }) {
     if (validate()) {
       setErrors({});
 
-      console.log('Submit', formData.email, formData.password)
-
       try {
         const userCredential = await signInWithEmailAndPassword(auth, formData.email, formData.password)
         const user = userCredential.user;
@@ -136,7 +134,7 @@ function Signin({ setPhoneLogin }) {
     <div className='relative'>
       <div className=''>
         <div className='mb-5 flex flex-col justify-center items-center gap-2'>
-          <div className='text-center text-4xl font-bold '>SignIn</div>
+          <div className='text-center text-2xl sm:text-4xl font-bold '>SignIn</div>
           <div className="w-full flex justify-center items-center gap-5">
             <div onClick={signInwithGoogle} className='cursor-pointer' ><GoogleIcon /></div>
             <div className='cursor-pointer' ><FacebookIcon /></div>
