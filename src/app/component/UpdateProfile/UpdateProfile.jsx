@@ -60,22 +60,22 @@ const UpdateProfile = () => {
     return `${year}-${month}-${day}`;
 };
 
-  const getUserFromLocalStorage = () => {
-    let user = localStorage.getItem("user");
-    user = JSON.parse(user);
-    if (user)
-      setFormData((prev) => {
-        let obj = {};
-        console.log(user.age)
-        obj.fullName = user.displayName;
-        obj.email = user.email;
-        obj.phone = user.phoneNumber;
-        obj.gender= user.gender;
-        obj.dob= convertAgeToBirthdate(user.age);
-        obj.age= user.age;
-        return obj;
-      });
-  };
+const getUserFromLocalStorage = () => {
+  let user = localStorage.getItem("user");
+  user = JSON.parse(user);
+  if (user) {
+    setFormData((prev) => {
+      return {
+        fullName: user.displayName || "",
+        email: user.email || "",
+        phone: user.phoneNumber || "",
+        gender: user.gender || "",
+        dob: user.age ? convertAgeToBirthdate(user.age) : "",
+        age: user.age || ""
+      };
+    });
+  }
+};
 
   useEffect(() => {
     getUserFromLocalStorage();
@@ -280,7 +280,7 @@ const UpdateProfile = () => {
               type="date"
               name="dob"
               placeholder="select dob"
-              value={"1999-10-19"}
+              value={formData.dob}
               onChange={handleChange}
               className={`p-4 rounded-lg bg-white border-black w-full h-[55px] block text-sm text-black border-2 appearance-none focus:outline-none focus:ring-0 focus:border-black peer ${
                 errors.dob ? "border-red-500" : ""

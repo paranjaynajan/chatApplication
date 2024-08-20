@@ -15,20 +15,21 @@ function Navbar() {
         if (user) setUserData(user);
     }, []);
     return (
-       <div className="bg-[#F4CE14] rounded-t-[10px] py-4 px-5 flex items-center justify-between">
+       <div className="bg-[#F4CE14] rounded-l-[10px] py-4 px-5 flex items-center justify-between">
     <div className="text-xl font-[600]">MyChat</div>
     <div className=" flex gap-2">
         <Tooltip title={userData?.displayName} className="cursor-pointer ">
-            <div className='rounded-full h-[45px] w-[45px] border-2 border-black overflow-hidden'>
-                <Image
+           {userData?.photoURL?<div className='rounded-full h-[45px] w-[45px] border-2 border-black overflow-hidden'>
+                 <Image
                     height={45}
                     width={45}
                     className="object-cover !h-full !w-full"
                     alt={userData?.displayName}
                     src={userData?.photoURL}
                     onClick={() => { router.push("/profile") }}
-                />
-            </div>
+                /> 
+            </div>:<Avatar  alt={userData?.displayName}
+                    src={userData?.photoURL}  onClick={() => { router.push("/profile") }}/>} 
         </Tooltip>
 
         <button 
@@ -37,7 +38,7 @@ function Navbar() {
                 signOut(auth);
             }}
             type="button"
-            className="w-[52%] xs:p-2 p-2  border-[2px] cursor-pointer rounded-md border-black bg-[black] text-white"
+            className=" xs:p-2 p-2  border-[2px] cursor-pointer rounded-md border-black bg-[black] text-white"
         >
             Logout
         </button>

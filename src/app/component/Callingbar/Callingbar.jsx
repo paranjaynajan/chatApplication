@@ -14,7 +14,7 @@ const Callingbar =({userName,setFriendId})=>{
       setAnchorEl(null);
     };
     return (
-            <div className='py-[26px] rounded-t-[10px] px-5 flex relative text-xl items-center justify-between bg-[#45474B] text-[#F4CE14]'>
+            <div className='py-[26px] rounded-tr-[10px] px-5 flex relative text-xl items-center justify-between bg-[#45474B] text-[#F4CE14]'>
         <div className='flex justify-center items-center gap-3'>
           <div className='cursor-pointer md:hidden block' onClick={() => { setFriendId(null) }} >
             <KeyboardBackspaceIcon />

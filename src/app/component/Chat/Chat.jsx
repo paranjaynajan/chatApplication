@@ -69,7 +69,7 @@ function Chat({ friendId, setFriendId }) {
       <div style={{ scrollBehavior: 'smooth' }} className="flex-grow   pb-5 bg-[url('/path/to/whatsapp-bg.png')] bg-repeat bg-center p-4 overflow-y-auto scroll-container2">
        <ChatWindow messages={messages}/>
       </div>
-      <div className="p-4 bg-[#F5F7F8] sticky bottom-0">
+      <div className="p-4 bg-[#F5F7F8] sticky bottom-0 rounded-[10px]">
         <Input/>
       </div>
     </div>

@@ -45,6 +45,8 @@ const Profile = () => {
     if (user) {
       console.log(user, "user");
       setUserInfo(user);
+    }
+    if(user.photoURL){
       setImage(user.photoURL);
     }
   };
