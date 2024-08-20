@@ -36,8 +36,8 @@ const SignUp = () => {
     const dropdownRef = useRef(null);
     function writeUserData(userId, name, email, phone) {
         set(ref(db, 'users/' + userId), {
-            username: name,
-            phone: phone,
+            displayName: name,
+            phoneNumber: phone,
             email: email,
         });
     }
@@ -45,8 +45,8 @@ async function writeIntoFireStore( name, email, phone,photoUrl){
     try {
         console.log('Writing', name, email, photoUrl);
         const docRef = await addDoc(collection(db, "users"), {
-            username: name,
-            phone: phone,
+            displayName: name,
+            phoneNumber: phone,
             email: email,
             photoUrl:photoUrl
         });

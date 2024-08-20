@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Avatar from '@mui/material/Avatar';
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import Image from "next/image";
+import { getAuth, signOut } from "firebase/auth";
 import app from '../../../utils/firebaseconfig'
 import { Tooltip } from '@mui/material';
 import { useRouter } from 'next/navigation.js';
@@ -14,14 +15,15 @@ function Navbar() {
       if(user)
       setUserData(user)
     },[])
+    console.log(userData?.photoURL,"1111111")
     return (
         <div className='bg-[#F4CE14] rounded-t-[10px] py-4 px-5 flex items-center justify-between'>
             <div className='text-xl font-[600]' >
                 MyChat
             </div>
             <div className='flex justify-center items-center gap-2'>
-                <Tooltip title={userData?.username} className='cursor-pointer'>
-                <Avatar alt={userData?.username} src={userData.photoUrl} onClick={()=>{console.log("ja");router.push("/profile")}} />
+                <Tooltip title={userData?.displayName} className='cursor-pointer'>
+                <Image height={35} width={35}   className="object-cover h-full w-full rounded-full"  alt={userData?.displayName} src={userData?.photoURL} onClick={()=>{router.push("/profile")}} />
                 </Tooltip>
                
                 <button

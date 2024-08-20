@@ -54,15 +54,26 @@ const Profile = () => {
   
     return unsubscribe;
   };
-
+const fetchUserInfoFromLocalStorage=()=>{
+  let user = localStorage.getItem('user')
+  user = JSON.parse(user)
+  if(user){
+    setUserInfo(user)
+  }
+  if (user.photoURL) {
+    setImage(user.photoURL);
+  } else {
+    setImage(wall);
+  }
+}
   useEffect(() => {
-    const unsubscribe = fetchUserInfoFromFirestore(auth, db, setUserInfo, setImage, wall);
-   
+    // const unsubscribe = fetchUserInfoFromFirestore(auth, db, setUserInfo, setImage, wall);
+   fetchUserInfoFromLocalStorage()
   }, []);
 
   
 
-  
+
 
   
 
@@ -81,7 +92,7 @@ const Profile = () => {
         const userDocRef = doc(db, "users", userDoc.id);
         console.log(userDocRef)
         await updateDoc(userDocRef, {
-          photoUrl: url,
+          photoURL: url,
         });
       } else {
         console.log("No user found with the provided email.");
@@ -154,7 +165,7 @@ const Profile = () => {
               onChange={changeProfilePic}
             />
           </label>
-          <div className="text-xl font-[600]">Hello,{userInfo?.username}</div>
+          <div className="text-xl font-[600]">Hello,{userInfo?.displayName}</div>
           <div className="flex justify-center items-center cursor-pointer" onClick={() => {router.back()  }}>
           <div className=''  >
             <KeyboardBackspaceIcon />

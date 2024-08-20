@@ -27,12 +27,13 @@ const UpdateProfile = () => {
     useEffect(() => {
         let user = localStorage.getItem('user')
         user = JSON.parse(user)
+        console.log(user)
         if (user)
             setFormData((prev) => {
                 let obj = {}
-                obj.fullName = user.username
+                obj.fullName = user.displayName
                 obj.email = user.email
-                obj.phone = user.phone
+                obj.phone = user.phoneNumber
                 return obj
             })
     }, [])
@@ -100,7 +101,7 @@ const UpdateProfile = () => {
             const userDocRef = doc(db, "users", userDoc.id);
 
             await updateDoc(userDocRef, {
-              username:formData.fullName,
+              displayName:formData.fullName,
               gender:formData.gender,
               phone:formData.phone,
               age:formData.age
