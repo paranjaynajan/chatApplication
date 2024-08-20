@@ -14,7 +14,7 @@ export default function () {
       if(user){
         setUserData(user)
 
-        setUserDatatoLocalStorage(user)
+        setUserDatatoLocalStorage(user.email)
       
       }else{
         setUserData(null)
@@ -23,12 +23,11 @@ export default function () {
   }, [])
 
 
-  const setUserDatatoLocalStorage =async(user)=>{
-    const q = query(collection(db, "users"), where("email", "==", user.email));
+  const setUserDatatoLocalStorage =async(email)=>{
+    const q = query(collection(db, "users"), where("email", "==", email));
     const querySnapshot = await getDocs(q);
     if (querySnapshot) {           
       querySnapshot.forEach((doc) => {
-        console.log(doc,"user")
         const data = doc.data();
         const newUser=JSON.stringify(data)
         localStorage.setItem('user',newUser)

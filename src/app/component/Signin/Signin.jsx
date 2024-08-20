@@ -5,12 +5,14 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import XIcon from '@mui/icons-material/X';
 import { useRouter } from 'next/navigation';
 import { v4 as uuidv4 } from 'uuid';
-import { getAuth, signInWithEmailAndPassword,signInWithPopup,GithubAuthProvider } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, signInWithPopup, GithubAuthProvider } from "firebase/auth";
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import app from "../../../utils/firebaseconfig";
 import { GoogleAuthProvider } from "firebase/auth";
-function Signin({setPhoneLogin}) {
+import { collection, addDoc, getFirestore ,query,where,getDocs} from "firebase/firestore"
+const db = getFirestore(app);
+function Signin({ setPhoneLogin }) {
   const auth = getAuth(app);
   const router = useRouter()
   const [formData, setFormData] = useState({ email: '', password: '' });
@@ -18,7 +20,27 @@ function Signin({setPhoneLogin}) {
   const [showPassword, setShowPassword] = useState(false);
   const provider = new GoogleAuthProvider();
 
-
+  async function writeIntoFireStore(uid, name, email, phone, photoUrl) {
+    try {
+      const usersRef = collection(db, "users");
+      const q = query(usersRef, where("email", "==", email));
+      const querySnapshot = await getDocs(q);
+      if (querySnapshot.empty) {
+        const docRef = await addDoc(usersRef, {
+          uid: uid,
+          displayName: name,
+          phoneNumber: phone,
+          email: email,
+          photoURL: photoUrl
+        });
+        console.log("Document written with ID: ", docRef.id);
+      } else {
+        console.log("A user with this email already exists.");
+      }
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,7 +51,7 @@ function Signin({setPhoneLogin}) {
     }));
   };
 
- 
+
   const validate = () => {
     const newErrors = {};
     if (!formData.email) {
@@ -56,54 +78,58 @@ function Signin({setPhoneLogin}) {
       try {
         const userCredential = await signInWithEmailAndPassword(auth, formData.email, formData.password)
         const user = userCredential.user;
-        console.log(user.accessToken)
+        console.log(user,"user")
+        writeIntoFireStore(user.uid,user.displayName, user.email, user.phoneNumber
+          , user.photoURL)
         localStorage.setItem('token', user.accessToken)
       } catch (error) {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorCode,errorMessage)
+        console.log(errorCode, errorMessage)
       }
     }
   };
 
 
-  const signInwithGoogle=async()=>{
-    try{
-      const result=await signInWithPopup(auth, provider)
+  const signInwithGoogle = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider)
       const credential = GoogleAuthProvider.credentialFromResult(result);
+      writeIntoFireStore(result.user.uid,result.user.displayName, result.user.email, result.user.phoneNumber
+        , result.user.photoURL)
       const token = credential.accessToken;
       localStorage.setItem('token', token);
-  
-    }catch(error){  
+
+    } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
-  
+
       const email = error.customData.email;
       const credential = GoogleAuthProvider.credentialFromError(error);
-      console.log(errorCode,errorMessage)
+      console.log(errorCode, errorMessage)
     }
-    
-   
-  
+
+
+
   }
-  const signInwithGithub=async()=>{
-    try{
-      const result=await signInWithPopup(auth, provider)
+  const signInwithGithub = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider)
       const credential = GithubAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
       localStorage.setItem('token', token);
-  
-    }catch(error){  
+
+    } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
-  
+
       const email = error.customData.email;
       const credential = GithubAuthProvider.credentialFromError(error);
-      console.log(errorCode,errorMessage)
+      console.log(errorCode, errorMessage)
     }
-    
-   
-  
+
+
+
   }
 
   return (
@@ -112,7 +138,7 @@ function Signin({setPhoneLogin}) {
         <div className='mb-5 flex flex-col justify-center items-center gap-2'>
           <div className='text-center text-4xl font-bold '>SignIn</div>
           <div className="w-full flex justify-center items-center gap-5">
-          <div onClick={signInwithGoogle} className='cursor-pointer' ><GoogleIcon /></div>
+            <div onClick={signInwithGoogle} className='cursor-pointer' ><GoogleIcon /></div>
             <div className='cursor-pointer' ><FacebookIcon /></div>
             <div className='cursor-pointer' onClick={signInwithGithub} ><GitHubIcon /></div>
             <div className='cursor-pointer' ><XIcon /></div>
@@ -174,7 +200,7 @@ function Signin({setPhoneLogin}) {
             <button
               type="button"
               className=" xs:p-4 p-2 w-full border-[2px] rounded-md border-black bg-transparent text-white"
-              onClick={()=>setPhoneLogin(true)}
+              onClick={() => setPhoneLogin(true)}
             >
               Login via OTP
             </button>

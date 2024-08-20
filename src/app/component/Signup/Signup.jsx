@@ -13,7 +13,7 @@ import React, { ChangeEvent, FormEvent, useEffect, useMemo, useRef, useState } f
 import { getDatabase, ref, set } from "firebase/database"
 import { getAuth, createUserWithEmailAndPassword, signInWithPopup ,updateProfile} from "firebase/auth";
 import app from "../../../utils/firebaseconfig";
-import { collection, addDoc, getFirestore } from "firebase/firestore"
+import { collection, addDoc, getFirestore,query,getDocs,where } from "firebase/firestore"
 
 
 
@@ -41,20 +41,27 @@ const SignUp = () => {
             email: email,
         });
     }
-async function writeIntoFireStore( name, email, phone,photoUrl){
-    try {
-        console.log('Writing', name, email, photoUrl);
-        const docRef = await addDoc(collection(db, "users"), {
-            displayName: name,
-            phoneNumber: phone,
-            email: email,
-            photoUrl:photoUrl
-        });
-        console.log("Document written with ID: ", docRef.id);
-      } catch (e) {
-        console.error("Error adding document: ", e);
+    async function writeIntoFireStore(uid, name, email, phone, photoUrl) {
+        try {
+          const usersRef = collection(db, "users");
+          const q = query(usersRef, where("email", "==", email));
+          const querySnapshot = await getDocs(q);
+          if (querySnapshot.empty) {
+            const docRef = await addDoc(usersRef, {
+              uid: uid,
+              displayName: name,
+              phoneNumber: phone,
+              email: email,
+              photoURL: photoUrl
+            });
+            console.log("Document written with ID: ", docRef.id);
+          } else {
+            console.log("A user with this email already exists.");
+          }
+        } catch (e) {
+          console.error("Error adding document: ", e);
+        }
       }
-}
 
 
     const handleChange = (e) => {
@@ -98,7 +105,7 @@ async function writeIntoFireStore( name, email, phone,photoUrl){
                 await updateProfile(user, {
                     displayName: formData.name,
                 });
-                writeIntoFireStore( formData.name, formData.email, formData.phoneNumber,user.photoURL)
+                writeIntoFireStore(user.uid, formData.name, formData.email, formData.phoneNumber,user.photoURL)
                 localStorage.setItem('token', user.accessToken)
             } catch (error) {
                 const errorCode = error.code;
