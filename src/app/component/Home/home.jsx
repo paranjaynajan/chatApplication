@@ -1,16 +1,24 @@
-import React from 'react'
-import { getAuth, onAuthStateChanged ,signOut} from "firebase/auth";
-import app from "../../../utils/firebaseconfig.js"
-function Home({userData}) {
-  const auth = getAuth(app);
+import React, { useState } from "react";
+import Sidebar from "../Sidebar/Sidebar.jsx";
+import Chat from "../Chat/Chat.jsx";
+
+function Home() {
+  const [friendId, setFriendId] = useState(null);
+
   return (
-    <div className='flex flex-col gap-2 justify-center items-center'>
-      <h1 className='text-lg font-bold'>
-        Hello,{userData.email}
-        </h1>
-    <button  className=" xs:p-4 p-2  border-[2px] rounded-md border-black bg-black text-white" onClick={()=>signOut(auth)}>SignOut</button>
+    <div className="bg-[#F5F7F8] flex h-screen   justify-center items-center  p-6 sm:p-10">
+      <div style={{boxShadow:"rgba(0, 0, 0, 0.35) 0px 5px 15px"}}
+       className="border-[1px]  rounded-[10px] w-full  max-w-[1200px] h-[100%]  
+       grid grid-cols-1 md:grid-cols-6 ">
+        <div className={` md:col-span-3 rounded-[10px] lg:col-span-2 bg-[#495E57] shadow-r-lg h-full ${friendId && 'hidden md:block'}`}>
+          <Sidebar setFriendId={setFriendId} />
+        </div>
+        <div className={`col-span-4 rounded-[10px]  md:col-span-3 lg:col-span-4 w-full h-full ${!friendId && 'hidden md:block'}`}>
+          <Chat friendId={friendId} setFriendId={setFriendId} />
+        </div>
+      </div>
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;
