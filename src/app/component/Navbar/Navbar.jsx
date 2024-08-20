@@ -37,7 +37,7 @@ function Navbar() {
                 signOut(auth);
             }}
             type="button"
-            className="w-[60%] xs:p-2 p-2  border-[2px] cursor-pointer rounded-md border-black bg-[black] text-white"
+            className="w-[52%] xs:p-2 p-2  border-[2px] cursor-pointer rounded-md border-black bg-[black] text-white"
         >
             Logout
         </button>
