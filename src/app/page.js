@@ -12,7 +12,7 @@ export default function () {
   useEffect(() => {
     onAuthStateChanged(auth,(user)=>{
       if(user){
-        console.log(user?.email,"user")
+        console.log(user,"check user")
         setUserData(user)
         setUserDatatoLocalStorage(user.email)
       
